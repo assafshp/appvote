@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to MiBa</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/media-queries.css" />
+</head>
+
+<body>
+    <!-- APP -->
+    <div id="app">
+        <div class="app-overlay"></div>
+        <!-- HEADER -->
+        <header>
+            <div class="logo">
+                <h1>MiBa</h1>
+                <img src="images/star.svg">
+            </div>
+        </header>
+        <!-- MAIN -->
+        <main>
+            <h1 id="main" class="main-title"></h1>
+            <h5 id="main1" class="main-title2"></h5>
+            <div id="cards" class="cards"></div>
+            <div id="endvote" class="main-title endvote" style="display: none;"><h4>מעולה, תודה רבה ! הצבעתך עוברת למארגן האירוע ותעודכן בהודעה בהקדם</h4></div>
+            <div id="summary" class="summary"></div>
+            <div id="endsummary" class="main-title endvote" style="display: none;">מהמם, יש לנו תאריך לאירוע ! כבר תקבל/י הודעה לעדכון</div>
+
+            <div id="invitation" class="invitation" style="display: none;"></div>
+        </main>
+    </div>
+</body>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+
+<script defer src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/8.6.1/firebase-functions.js"></script>
+
+<script>
+
+    const loadEl = document.querySelector('#main');
+    const loadEl1 = document.querySelector('#main1');
+
+    let inviteeName = '';
+    let voteCount = 0;
+
+    var firebaseConfig = {
+        apiKey: "AIzaSyD1s4kgSzNpziQl5m3mJyRTd06VLdFQw_U",
+        authDomain: "evently-fa5d5.firebaseapp.com",
+        projectId: "evently-fa5d5",
+        storageBucket: "evently-fa5d5.appspot.com",
+        messagingSenderId: "781249089893",
+        appId: "1:781249089893:web:99937b793d6748124b118c",
+        measurementId: "G-LLRYMK4CFT"
+    };
+
+    var app;
+    var db;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const phone = urlParams.get('p');
+    console.log(`phone=${phone}`);
+    const type = urlParams.get('t');
+    console.log(`type=${type}`);
+    let userId = urlParams.get('to');
+    if (userId && userId.indexOf('9')!==0){
+        userId=userId.substr(1).trim();
+    }
+    console.log(`userId=${userId}`);
+    let votes = {};
+    let event = {};
+
+
+    let candidates = [
+        {
+            id: 0,
+            name: "Date1",
+            votes: 260,
+        },
+        {
+            id: 1,
+            name: "Date2",
+            votes: 260,
+        }
+    ]
+
+
+    document.addEventListener('DOMContentLoaded', async () => {
+
+        try {
+            app = firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore(app);
+            
+            const loadEl = document.querySelector('#main');
+            
+            // loadEl.textContent = 'loaded';
+            if (phone) {
+
+                event = (await db.collection('events').doc(phone).get()).data();
+                event.invitees.forEach(invitee => {
+                    if (invitee.phone == userId) {
+                        inviteeName = invitee.name;
+                    }
+                });
+                console.log(`inviteeName=${inviteeName}`);
+                candidates[0].name = event.date;
+                candidates[1].name = event.date1;
+            }
+            
+
+            switch (type) {
+                case 'invitation':
+                    loadEl.textContent = 'להלן ההזמנה לאירוע';
+                    // document.getElementById('main').style.display = "none";
+                    document.getElementById('cards').style.display = "none";
+                    votes = (await db.collection('votes').doc(phone).get()).data();
+
+                    const invitation = document.querySelector('.invitation');
+                    invitation.style.display = "";
+                    invitation.innerHTML = getInvitation();
+
+                    break;
+                case 'summary':
+                    loadEl.textContent = 'להלן תוצאות ההצבעה של המוזמנים';
+                    loadEl1.textContent = 'אנא בחר/י בתאריך הרצוי לאירוע';
+
+                    document.getElementById('cards').style.display = "none";
+                    votes = (await db.collection('votes').doc(phone).get()).data();
+                    const summary = document.querySelector('.summary');
+                    summary.innerHTML = getSummary();
+                    break;
+
+                default:
+                    loadEl.textContent = 'הוזמנת לאירוע ע״י MiBa';
+                    loadEl1.textContent = 'בחר/י בתאריך המתאים לך';
+                    const cards = document.querySelector('.cards');
+                    cards.innerHTML = getCards();
+
+                    break;
+            }
+        } catch (e) {
+            console.error(e);
+            loadEl.textContent = 'Error';
+        }
+    });
+</script>
+
+<script src="js/functions.js"></script>
+<script src="js/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
+
+</html>
