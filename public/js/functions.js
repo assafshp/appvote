@@ -94,24 +94,57 @@ const selectDate = async (date) => {
 }
 
 const vote = async (option, date, name) => {
-    // debugger
     console.log(`vote was called, option=${option}, name=${name}, date=${date}`);
     document.getElementById(name).style.opacity = 0.4;
     document.getElementById(name).style.pointerEvents = "none";
 
-
     voteCount++;
-    
 
     confetti({
         particleCount: 300,
         spread: 90,
     });
 
+    try {
+        const increment = firebase.firestore.FieldValue.increment(option);
+        const storyRef = db.collection('results').doc(date.toLowerCase());
+        storyRef.update({ count: increment }, { merge: true });
+    } catch (error) {
+        console.log('error writing to firebase', error);
+    }
 
-    const increment = firebase.firestore.FieldValue.increment(option);
-    const storyRef = db.collection('results').doc(date.toLowerCase());
-    storyRef.update({ count: increment }, { merge: true });
+
+    try {
+        // const xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+        // const theUrl = "https://lsybkmzyk:w0cfz8ggvt@bonsai-demo-4717631485.us-east-1.bonsaisearch.net:443/appvote/doc";
+        // xmlhttp.open("POST", theUrl);
+        // xmlhttp.setRequestHeader("Content-Type", "application/json");
+        // xmlhttp.send(JSON.stringify({ "amount":1, "count": 10, "name": "Beenthere", "voteid":1 }));
+        var data = JSON.stringify({
+            "amount": 1,
+            "count": option,
+            "name": date.toLowerCase(),
+            "voteid": 1
+          });
+          
+          var xhr = new XMLHttpRequest();
+          xhr.withCredentials = true;
+          
+          xhr.addEventListener("readystatechange", function() {
+            if(this.readyState === 4) {
+              console.log(this.responseText);
+            }
+          });
+          
+          xhr.open("POST", "https://lsybkmzyk:w0cfz8ggvt@bonsai-demo-4717631485.us-east-1.bonsaisearch.net:443/appvote/doc");
+          xhr.setRequestHeader("Content-Type", "application/json");
+          xhr.setRequestHeader("Authorization", "Basic bHN5YmttenlrOncwY2Z6OGdndnQ=");
+          
+          xhr.send(data);
+    } catch (error) {
+        console.log('error writing to elastic', error);
+    }
+
 
     if (voteCount === 3) {
         document.getElementById('endvote').style.display = "";

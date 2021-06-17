@@ -70,12 +70,12 @@
     const phone = urlParams.get('p');
     console.log(`phone=${phone}`);
     const type = urlParams.get('t');
-    console.log(`type=${type}`);
-    let userId = urlParams.get('to');
-    if (userId && userId.indexOf('9') !== 0) {
-        userId = userId.substr(1).trim();
-    }
-    console.log(`userId=${userId}`);
+    // console.log(`type=${type}`);
+    // let userId = urlParams.get('to');
+    // if (userId && userId.indexOf('9') !== 0) {
+    //     userId = userId.substr(1).trim();
+    // }
+    // console.log(`userId=${userId}`);
     let votes = {};
     let event = {};
 
@@ -117,7 +117,7 @@
                 //         inviteeName = invitee.name;
                 //     }
                 // });
-                console.log(`inviteeName=${inviteeName}`);
+                // console.log(`inviteeName=${inviteeName}`);
                 candidates[0].name = event.date;
                 candidates[1].name = event.date1;
                 candidates[2].name = event.date2;
