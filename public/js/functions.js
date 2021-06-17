@@ -7,17 +7,17 @@ const getCards = () => {
                     <span class="candidate-name">${candidate.name}</span>
                 </div>
             </div>
-            <button class="card-btn btn-matim" onclick=vote(0,${candidate.id},inviteeName)>מתאים לי</button>
-            <button class="card-btn btn-no-matim" onclick=vote(1,${candidate.id},inviteeName)>לא מתאים לי</button>
-            <button class="card-btn btn-zorm" onclick=vote(2,${candidate.id},inviteeName)>זורמים</button>
+            <button class="card-btn btn-matim" onclick=vote(0,"${candidate.name}","${candidate.id}")>0</button>
+            <button class="card-btn btn-no-matim" onclick=vote(50,"${candidate.name}","${candidate.id}")>50</button>
+            <button class="card-btn btn-zorm" onclick=vote(100,"${candidate.name}","${candidate.id}")>100</button>
         </div>
         `
     })
 }
 
 const getInvitation = () => {
-    
-        return `
+
+    return `
         <div class="card" id="">
             <div class="card-info">                
                 <div class="candidate-info">
@@ -32,7 +32,7 @@ const getInvitation = () => {
             <button class="card-btn btn-zorm" onclick=conf()>איזה כיף</button>
         </div>
         `
-    
+
 }
 
 const getSummary = () => {
@@ -88,35 +88,47 @@ const selectDate = async (date) => {
         particleCount: 300,
         spread: 90,
         ticks: 300
-      });
+    });
 
 
 }
 
 const vote = async (option, date, name) => {
+    // debugger
     console.log(`vote was called, option=${option}, name=${name}, date=${date}`);
-    document.getElementById(date).style.opacity = 0.4;
-    document.getElementById(date).style.pointerEvents = "none";
-    
+    document.getElementById(name).style.opacity = 0.4;
+    document.getElementById(name).style.pointerEvents = "none";
+
 
     voteCount++;
-    const dateOption = (date === 0) ? 'date' : 'date1';
-    console.log(`dateOption=${dateOption}`);
-    const objToSet = {
-        [dateOption]: {
-            [name]: option
-        }
-    }
+    // const dateOption = (date === 0) ? 'date' : 'date1';
+    // console.log(`dateOption=${dateOption}`);
+    // const objToSet = {
+    //     [dateOption]: {
+    //         [name]: option
+    //     }
+    // }
 
     confetti({
         particleCount: 300,
         spread: 90,
-      });
+    });
 
-    db.collection('votes').doc(phone).set(objToSet, { merge: true });
+    //   const db = firebase.firestore();
+    const increment = firebase.firestore.FieldValue.increment(option);
+
+    // Document reference
+    const storyRef = db.collection('results').doc(date.toLowerCase());
+
+    // Update read count
+    storyRef.update({ count: increment }, { merge: true });
+
+    // db.collection('votes').doc(phone).set(objToSet, { merge: true });
+    // db.collection('results').doc(date.toLowerCase()).set(objToSet, { merge: true });
 
 
-    if (voteCount === 2) {
+
+    if (voteCount === 3) {
         document.getElementById('endvote').style.display = "";
         document.getElementById('main').style.display = "none";
         document.getElementById('main1').style.display = "none";
@@ -131,6 +143,6 @@ const conf = () => {
     confetti({
         particleCount: 300,
         spread: 90,
-      });
+    });
 }
 
