@@ -12,14 +12,15 @@
 </head>
 
 <body>
+    
     <!-- APP -->
     <div id="app">
         <div class="app-overlay"></div>
         <!-- HEADER -->
         <header>
             <div class="logo">
-                <h1>MiBa</h1>
-                <img src="images/star.svg">
+                <h1>X-Labs</h1>
+                <!-- <img src="images/star.svg"> -->
             </div>
         </header>
         <!-- MAIN -->
@@ -27,9 +28,14 @@
             <h1 id="main" class="main-title"></h1>
             <h5 id="main1" class="main-title2"></h5>
             <div id="cards" class="cards"></div>
-            <div id="endvote" class="main-title endvote" style="display: none;"><h4>מעולה, תודה רבה ! הצבעתך עוברת למארגן האירוע ותעודכן בהודעה בהקדם</h4></div>
+            <div id="endvote" class="main-title endvote" style="display: none;">
+                <h4>מעולה, תודה רבה ! </h4>
+                <a href="/res.html">לתוצאות</a>
+
+            </div>
             <div id="summary" class="summary"></div>
-            <div id="endsummary" class="main-title endvote" style="display: none;">מהמם, יש לנו תאריך לאירוע ! כבר תקבל/י הודעה לעדכון</div>
+            <div id="endsummary" class="main-title endvote" style="display: none;">מהמם, יש לנו תאריך לאירוע ! כבר
+                תקבל/י הודעה לעדכון</div>
 
             <div id="invitation" class="invitation" style="display: none;"></div>
         </main>
@@ -49,13 +55,12 @@
     let voteCount = 0;
 
     var firebaseConfig = {
-        apiKey: "AIzaSyD1s4kgSzNpziQl5m3mJyRTd06VLdFQw_U",
-        authDomain: "evently-fa5d5.firebaseapp.com",
-        projectId: "evently-fa5d5",
-        storageBucket: "evently-fa5d5.appspot.com",
-        messagingSenderId: "781249089893",
-        appId: "1:781249089893:web:99937b793d6748124b118c",
-        measurementId: "G-LLRYMK4CFT"
+        apiKey: "AIzaSyBGvPBIU_J7NHpUqAYxmJm7XHs8JQDJzbQ",
+        authDomain: "xappvote.firebaseapp.com",
+        projectId: "xappvote",
+        storageBucket: "xappvote.appspot.com",
+        messagingSenderId: "582541238903",
+        appId: "1:582541238903:web:c6ccd79e010899408ddc72"
     };
 
     var app;
@@ -67,8 +72,8 @@
     const type = urlParams.get('t');
     console.log(`type=${type}`);
     let userId = urlParams.get('to');
-    if (userId && userId.indexOf('9')!==0){
-        userId=userId.substr(1).trim();
+    if (userId && userId.indexOf('9') !== 0) {
+        userId = userId.substr(1).trim();
     }
     console.log(`userId=${userId}`);
     let votes = {};
@@ -85,7 +90,13 @@
             id: 1,
             name: "Date2",
             votes: 260,
+        },
+        {
+            id: 2,
+            name: "Date3",
+            votes: 260,
         }
+
     ]
 
 
@@ -94,23 +105,24 @@
         try {
             app = firebase.initializeApp(firebaseConfig);
             db = firebase.firestore(app);
-            
+
             const loadEl = document.querySelector('#main');
-            
+
             // loadEl.textContent = 'loaded';
             if (phone) {
 
                 event = (await db.collection('events').doc(phone).get()).data();
-                event.invitees.forEach(invitee => {
-                    if (invitee.phone == userId) {
-                        inviteeName = invitee.name;
-                    }
-                });
+                // event.invitees.forEach(invitee => {
+                //     if (invitee.phone == userId) {
+                //         inviteeName = invitee.name;
+                //     }
+                // });
                 console.log(`inviteeName=${inviteeName}`);
                 candidates[0].name = event.date;
                 candidates[1].name = event.date1;
+                candidates[2].name = event.date2;
             }
-            
+
 
             switch (type) {
                 case 'invitation':
@@ -135,8 +147,8 @@
                     break;
 
                 default:
-                    loadEl.textContent = 'הוזמנת לאירוע ע״י MiBa';
-                    loadEl1.textContent = 'בחר/י בתאריך המתאים לך';
+                    loadEl.textContent = 'ברוכים הבאים';
+                    loadEl1.textContent = 'אנא הצבע לכל אחד מהמיזמים';
                     const cards = document.querySelector('.cards');
                     cards.innerHTML = getCards();
 

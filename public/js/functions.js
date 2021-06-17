@@ -101,41 +101,23 @@ const vote = async (option, date, name) => {
 
 
     voteCount++;
-    // const dateOption = (date === 0) ? 'date' : 'date1';
-    // console.log(`dateOption=${dateOption}`);
-    // const objToSet = {
-    //     [dateOption]: {
-    //         [name]: option
-    //     }
-    // }
+    
 
     confetti({
         particleCount: 300,
         spread: 90,
     });
 
-    //   const db = firebase.firestore();
+
     const increment = firebase.firestore.FieldValue.increment(option);
-
-    // Document reference
     const storyRef = db.collection('results').doc(date.toLowerCase());
-
-    // Update read count
     storyRef.update({ count: increment }, { merge: true });
-
-    // db.collection('votes').doc(phone).set(objToSet, { merge: true });
-    // db.collection('results').doc(date.toLowerCase()).set(objToSet, { merge: true });
-
-
 
     if (voteCount === 3) {
         document.getElementById('endvote').style.display = "";
         document.getElementById('main').style.display = "none";
         document.getElementById('main1').style.display = "none";
-
         document.getElementById('cards').style.display = "none";
-
-
     };
 }
 

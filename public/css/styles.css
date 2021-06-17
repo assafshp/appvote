@@ -123,11 +123,12 @@ main {
   box-shadow: 15px 15px 6px var(--shadow);
   transition: all 0.5s ease;
   cursor: pointer;
-}
-
-.card:first-of-type {
   margin-bottom: 5rem;
 }
+
+/* .card:first-of-type {
+  
+} */
 
 /* Card image */
 .card-image {
