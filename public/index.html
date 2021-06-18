@@ -161,6 +161,13 @@
             app = firebase.initializeApp(firebaseConfig);
             db = firebase.firestore(app);
 
+            const enabled = (await db.collection('events').doc('xlabs').get()).data().enabled;
+            if (!enabled){
+                document.getElementById('main').innerHTML='ההצבעה עדין לא החלה';
+                document.getElementById('main1').innerHTML = ' נסה שנית עוד מעט';
+                document.getElementById('cards').remove();
+            }
+
             if (phone) {
                 event = (await db.collection('events').doc(phone).get()).data();
                 candidates[0].name = event.date;
