@@ -15,6 +15,11 @@
   --btn-matim: #3fb3e4;
   --btn-no-matim: var(--btn-red);
   --btn-zorm: #6b473a;
+  --xlab1: RGB(253,185,10,255);
+  --xlab2: RGB(10,29,107,255);
+  --xlab3: RGB(97,199,181,255);
+
+
 }
 
 * {
@@ -42,7 +47,9 @@ body {
  *******/
 
 #app {
-  background: var(--bg-overlay);
+  /* background: var(--bg-overlay); */
+  background: var(--white);
+
   overflow-y: scroll;
 }
 
@@ -52,7 +59,7 @@ body {
   right: 0;
   left: 0;
   bottom: 0;
-  background: url(../images/american-flag.jpeg) no-repeat center center fixed;
+  /* background: url(../images/bg.jpg) no-repeat center center fixed; */
   background-size: cover;
   z-index: -1;
 }
@@ -62,7 +69,7 @@ body {
  **********/
 
 header {
-  background: var(--black);
+  background: var(--white);
   padding: 1rem 2rem;
 }
 
@@ -81,7 +88,7 @@ header {
 /* Star */
 .logo img {
   margin-right: 1rem;
-  width: 4rem;
+  width: 12rem;
 }
 
 /******** 
@@ -96,7 +103,7 @@ main {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 5rem 0;
+  padding: 2rem 0;
 }
 
 .invitation {
@@ -106,6 +113,9 @@ main {
   padding: 5rem 0;
 }
 
+.end-text {
+  padding: 4rem;
+}
 
 .summary {
   display: flex;
@@ -114,6 +124,13 @@ main {
   padding: 5rem 0;
 }
 
+.app-logo {
+  width: 5rem;
+}
+
+.xlabs-logo {
+  width: 20rem;
+}
 
 /* Card */
 .card {
@@ -123,7 +140,8 @@ main {
   box-shadow: 15px 15px 6px var(--shadow);
   transition: all 0.5s ease;
   cursor: pointer;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
 }
 
 /* .card:first-of-type {
@@ -138,13 +156,17 @@ main {
   vertical-align: middle;
 }
 
+.yarok{
+  width: 8rem;
+}
+
 /* Card information */
 .card-info {
   display: flex;
   justify-content: space-evenly;
   background: var(--white);
   color: var(--black);
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 
 .candidate-votes {
@@ -247,15 +269,15 @@ main {
 }
 
 .btn-matim {
-  background: var(--btn-matim);
+  background: var(--xlab1);
 }
 
 .btn-no-matim {
-  background: var(--btn-no-matim);
+  background: var(--xlab2);
 }
 
 .btn-zorm {
-  background: var(--btn-zorm);
+  background: var(--xlab3);
 }
 
 
