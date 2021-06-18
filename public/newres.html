@@ -36,6 +36,9 @@
                             <h1>מיזם</h1>
                         </div>
                         <div class="candidate-info">
+                            <img src="images/trophy.png" class="app-logo dollar undefined">
+                        </div>
+                        <div class="candidate-info">
                             <img src="images/dollar.png" class="app-logo dollar undefined">
                         </div>
                         <div class="candidate-info">
@@ -48,10 +51,13 @@
                             <img src="images/miba.png" class="app-logo-res undefined">
                         </div>
                         <div class="candidate-info">
-                            <h1 class="">1000</h1>
+                            <img id="mibawin" src="images/winner.png" style="display:none;width: 4rem;">
                         </div>
                         <div class="candidate-info">
-                            <h1 class="">100</h1>
+                            <h1 id="mibacount" class=""></h1>
+                        </div>
+                        <div class="candidate-info">
+                            <h1 id="mibaamount" class=""></h1>
                         </div>
                     </div>
                     <div class="card-info-res">
@@ -59,10 +65,13 @@
                             <img src="images/yarok.png" class="app-logo-res undefined">
                         </div>
                         <div class="candidate-info">
-                            <h1 class="">1000</h1>
+                            <img id="yarockwin" src="images/winner.png" style="display:none;width: 4rem;">
                         </div>
                         <div class="candidate-info">
-                            <h1 class="">100</h1>
+                            <h1 id="yarockcount" class=""></h1>
+                        </div>
+                        <div class="candidate-info">
+                            <h1 id="yarockamount" class=""></h1>
                         </div>
                     </div>
                     <div class="card-info-res">
@@ -70,17 +79,20 @@
                             <img src="images/beenthere.png" class="app-logo-res undefined">
                         </div>
                         <div class="candidate-info">
-                            <h1 class="">1000</h1>
+                            <img id="beentherewin" src="images/winner.png" style="display:none;width: 4rem;">
                         </div>
                         <div class="candidate-info">
-                            <h1 class="">100</h1>
+                            <h1 id="beentherecount" class=""></h1>
+                        </div>
+                        <div class="candidate-info">
+                            <h1 id="beenthereamount" class=""></h1>
                         </div>
                     </div>
                 </div>
-                
-                
-                
-               
+
+
+
+
             </div>
             <div id="endvote" class="main-title endvote" style="display: none;">
                 <h4 class="end-text">מעולה, תודה רבה ! </h4>
@@ -94,6 +106,7 @@
 <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
 <script defer src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
 <script>
+     let results = {};
 
     const loadEl = document.querySelector('#main');
     const loadEl1 = document.querySelector('#main1');
@@ -114,7 +127,7 @@
     var db;
 
     const urlParams = new URLSearchParams(window.location.search);
-    const phone = urlParams.get('p');
+    const phone = urlParams.get('p') || true;
     console.log(`phone=${phone}`);
     const type = urlParams.get('t');
     let votes = {};
@@ -141,6 +154,32 @@
 
     ]
 
+    function resultsView(results, winnerName){
+
+        document.getElementById('mibacount').innerText=results.miba.count;
+        document.getElementById('mibaamount').innerText=results.miba.amount;
+
+        document.getElementById('yarockcount').innerText=results.yarock.count;
+        document.getElementById('yarockamount').innerText=results.yarock.amount;
+
+        document.getElementById('beentherecount').innerText=results.beenthere.count;
+        document.getElementById('beenthereamount').innerText=results.beenthere.amount;
+
+        switch (winnerName) {
+            case 'miba':
+                document.getElementById('mibawin').style.display='';        
+                break;
+            case 'yarock':
+                document.getElementById('yarockwin').style.display='';        
+                break;
+            case 'beenthere':
+                document.getElementById('beentherewin').style.display='';        
+                break;
+            default:
+                break;
+        }
+    }
+
 
     document.addEventListener('DOMContentLoaded', async () => {
 
@@ -148,13 +187,31 @@
             app = firebase.initializeApp(firebaseConfig);
             db = firebase.firestore(app);
 
-            const loadEl = document.querySelector('#main');
+            // const loadEl = document.querySelector('#main');
+           
+
 
             if (phone) {
-                event = (await db.collection('events').doc(phone).get()).data();
-                candidates[0].name = event.date;
-                candidates[1].name = event.date1;
-                candidates[2].name = event.date2;
+              
+                let winnerCount =0;
+                let winnerName ='';
+
+                await db.collection("results").get().then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        // doc.data() is never undefined for query doc snapshots
+                        const groupResult = doc.data();
+                        console.log(doc.id, " => ", groupResult);
+                        results[doc.id] = groupResult;
+                        if (groupResult.count > winnerCount) {
+                            winnerCount = groupResult.count;
+                            winnerName = groupResult.name;
+                        }
+                    });
+                });
+                console.log(results);
+                console.log(winnerName);
+                resultsView(results, winnerName.toLowerCase());
+                
             }
 
             switch (type) {
@@ -174,7 +231,6 @@
     });
 </script>
 
-<script src="js/functions.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 
 
