@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    
+
     <!-- APP -->
     <div id="app">
         <div class="app-overlay"></div>
@@ -27,12 +27,54 @@
         <!-- MAIN -->
         <main>
 
-            <h1 id="main" class="main-title"></h1>
-            <h5 id="main1" class="main-title2"></h5>
-            <div id="cards" class="cards"></div>
+            <h1 id="main" class="main-title">זה הזמן להשפיע</h1>
+            <h5 id="main1" class="main-title2">אנא הצבע/י לכל אחד מהמיזמים</h5>
+            <div id="cards" class="cards" style="opacity: 1;">
+                <div class="card" id="0">
+                    <div class="card-info">
+                        <div class="candidate-info">
+
+                            <img src="images/miba.png" class="app-logo undefined">
+                        </div>
+                    </div>
+
+                    <button class="card-btn btn-matim" onclick="vote(0,&quot;MiBa&quot;,&quot;0&quot;)">0</button>
+                    <button class="card-btn btn-no-matim" onclick="vote(50,&quot;MiBa&quot;,&quot;0&quot;)">50</button>
+                    <button class="card-btn btn-zorm" onclick="vote(100,&quot;MiBa&quot;,&quot;0&quot;)">100</button>
+                </div>
+                ,
+                <div class="card" id="1">
+                    <div class="card-info">
+                        <div class="candidate-info">
+
+                            <img src="images/yarok.png" class="app-logo yarok">
+                        </div>
+                    </div>
+
+                    <button class="card-btn btn-matim" onclick="vote(0,&quot;YaRock&quot;,&quot;1&quot;)">0</button>
+                    <button class="card-btn btn-no-matim"
+                        onclick="vote(50,&quot;YaRock&quot;,&quot;1&quot;)">50</button>
+                    <button class="card-btn btn-zorm" onclick="vote(100,&quot;YaRock&quot;,&quot;1&quot;)">100</button>
+                </div>
+                ,
+                <div class="card" id="2">
+                    <div class="card-info">
+                        <div class="candidate-info">
+
+                            <img src="images/beenthere.png" class="app-logo undefined">
+                        </div>
+                    </div>
+
+                    <button class="card-btn btn-matim" onclick="vote(0,&quot;BeenThere&quot;,&quot;2&quot;)">0</button>
+                    <button class="card-btn btn-no-matim"
+                        onclick="vote(50,&quot;BeenThere&quot;,&quot;2&quot;)">50</button>
+                    <button class="card-btn btn-zorm"
+                        onclick="vote(100,&quot;BeenThere&quot;,&quot;2&quot;)">100</button>
+                </div>
+            </div>
             <div id="endvote" class="main-title endvote" style="display: none;">
                 <h4 class="end-text">מעולה, תודה רבה ! </h4>
-                <div >
+                <div>
                     <img class="xlabs-logo" src="images/xlabs_icon.png">
                 </div>
             </div>
@@ -99,7 +141,6 @@
             const loadEl = document.querySelector('#main');
 
             if (phone) {
-
                 event = (await db.collection('events').doc(phone).get()).data();
                 candidates[0].name = event.date;
                 candidates[1].name = event.date1;
@@ -108,12 +149,12 @@
 
             switch (type) {
                 default:
-                    loadEl.textContent = 'זה הזמן להשפיע';
-                    loadEl1.textContent = 'אנא הצבע/י לכל אחד מהמיזמים';
-                    const cards = document.querySelector('.cards');
-                    // document.getElementById('cards').style.opacity=0;
-                    cards.innerHTML = getCards();
-                    // document.getElementById('cards').style.opacity=1;
+                    // loadEl.textContent = 'זה הזמן להשפיע';
+                    // loadEl1.textContent = 'אנא הצבע/י לכל אחד מהמיזמים';
+                    // const cards = document.querySelector('.cards');
+                    // document.getElementById('cards').style.opacity = 0;
+                    // cards.innerHTML = getCards();
+                    // document.getElementById('cards').style.opacity = 1;
                     break;
             }
         } catch (e) {
