@@ -7,12 +7,47 @@
     <title>X-Labs 2021</title>
     <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"> -->
+    <link rel="stylesheet" href="css/res.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/media-queries.css" />
 </head>
 
 <body>
+    <div id="film-container">
+        <div class="animated-flicker">
+            <svg id="film-mask" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" width="100%" height="100%"
+                preserveAspectRatio="none" viewBox="0 0 400 225">
+                <rect class="rectangle01" width="400" height="225" />
+                <line id="line-h" class="line01" x1="0" y1="112.5" x2="400" y2="112.5" />
+                <line id="line-v" class="line02" x1="200" y1="0" x2="200" y2="225" />
+            </svg>
+            <svg id="film-countdown" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" width="100%" height="100%"
+                viewBox="0 0 400 225">
+                <circle id="circle-outer" class="circle01" cx="200" cy="112.5" r="95" />
+                <circle id="circle-inner" class="circle01" cx="200" cy="112.5" r="85" />
+                <circle class="circle02 animated-rotate" cx="200" cy="112.5" r="494.5" />
+                <g id="numbers" text-anchor="middle" class="no-select">
+                    <text id="animated-text1" x="200.5" y="155">10</text>
+                    <text id="animated-text2" x="200.5" y="155">9</text>
+                    <text id="animated-text3" x="200.5" y="155">8</text>
+                    <text id="animated-text4" x="200.5" y="155">7</text>
+                    <text id="animated-text5" x="200.5" y="155">6</text>
+                    <text id="animated-text6" x="200.5" y="155">5</text>
+                    <text id="animated-text7" x="200.5" y="155">4</text>
+                    <text id="animated-text8" x="200.5" y="155">3</text>
+                    <text id="animated-text9" x="200.5" y="155">2</text>
+                    <text id="animated-text10" x="200.5" y="155">1</text>
+                </g>
+            </svg>
+        </div>
+    </div>
 
+    <div id="message-container">
+        
+        
+    </div>
     <!-- APP -->
     <div id="app">
         <div class="app-overlay"></div>
@@ -36,7 +71,7 @@
                             <h1>מיזם</h1>
                         </div>
                         <div class="candidate-info">
-                            <img src="images/trophy.png" class="app-logo dollar undefined">
+                            <img src="images/trophy.png" class="app-logo undefined">
                         </div>
                         <div class="candidate-info">
                             <img src="images/dollar.png" class="app-logo dollar undefined">
@@ -106,7 +141,90 @@
 <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
 <script defer src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
 <script>
-     let results = {};
+    (function () {
+        if (!window.requestAnimationFrame) {
+            var nLastTime = 0,
+                aVendors = ['moz', 'ms', 'o', 'webkit'];
+            for (var i = 0; i < aVendors.length; ++i) {
+                window.requestAnimationFrame = window[aVendors[i] + 'RequestAnimationFrame'];
+                window.cancelAnimationFrame = window[aVendors[i] + 'CancelAnimationFrame'] || window[aVendors[i] + 'CancelRequestAnimationFrame'];
+            }
+            window.requestAnimationFrame = function (callback, element) {
+                var nCurrentTime = new Date().getTime(),
+                    nTimeToCall = Math.max(0, 16 - (nCurrentTime - nLastTime)),
+                    nTimer = window.setTimeout(function () {
+                        callback(nCurrentTime + nTimeToCall);
+                    }, nTimeToCall);
+                nLastTime = nCurrentTime + nTimeToCall;
+                return nTimer;
+            };
+        }
+        if (!window.cancelAnimationFrame) {
+            window.cancelAnimationFrame = function (nTimer) {
+                clearTimeout(nTimer);
+            };
+        }
+    }());
+
+    var circleOuter = document.getElementById('circle-outer'),
+        circleInner = document.getElementById('circle-inner'),
+        lineH = document.getElementById('line-h'),
+        lineV = document.getElementById('line-v'),
+        numbers = document.getElementById('numbers'),
+        nCircleCx = +circleOuter.getAttribute('cx'),
+        nCircleCy = +circleOuter.getAttribute('cy'),
+        nLineY = +lineH.getAttribute('y1'),
+        nLineX = +lineV.getAttribute('x1'),
+        nFps = 12, // Just like vintage silent films :]
+        nJitterLevel = 2.5, // How shaky is the projector?
+        nTick = 0;
+
+    function jitter() {
+        setTimeout(function () {
+            if (nTick === nFps * 9) {
+                // Reset position
+                circleOuter.setAttribute('cx', nCircleCx);
+                circleInner.setAttribute('cx', nCircleCx);
+                circleOuter.setAttribute('cy', nCircleCy);
+                circleInner.setAttribute('cy', nCircleCy);
+                lineH.setAttribute('y1', nLineY);
+                lineH.setAttribute('y2', nLineY);
+                lineV.setAttribute('x1', nLineX);
+                lineV.setAttribute('x2', nLineX);
+                numbers.style.transform = '';
+                // Transition after countdown
+                document.body.className = 'message';
+                return;
+            }
+            // Use rAF for improved performance
+            requestAnimationFrame(jitter);
+            // Repaint!
+            var nOffsetX = Math.random() * nJitterLevel * ((Math.random() >= 0.5) ? 1 : -1),
+                nOffsetY = Math.random() * nJitterLevel * ((Math.random() >= 0.5) ? 1 : -1);
+            circleOuter.setAttribute('cx', nCircleCx + nOffsetX);
+            circleInner.setAttribute('cx', nCircleCx + nOffsetX);
+            circleOuter.setAttribute('cy', nCircleCy + nOffsetY);
+            circleInner.setAttribute('cy', nCircleCy + nOffsetY);
+            lineH.setAttribute('y1', nLineY + nOffsetY);
+            lineH.setAttribute('y2', nLineY + nOffsetY);
+            lineV.setAttribute('x1', nLineX + nOffsetX);
+            lineV.setAttribute('x2', nLineX + nOffsetX);
+            numbers.style.transform = 'translate3d(' + nOffsetX + 'px, ' + nOffsetY + 'px, 0)';
+            ++nTick;
+            console.log(nTick);
+            if (nTick == 105) {
+                document.getElementById('message-container').remove();
+                document.getElementById('film-container').remove();
+
+            }
+        }, 1000 / nFps);
+    }
+
+    jitter();
+
+
+
+    let results = {};
 
     const loadEl = document.querySelector('#main');
     const loadEl1 = document.querySelector('#main1');
@@ -154,26 +272,26 @@
 
     ]
 
-    function resultsView(results, winnerName){
+    function resultsView(results, winnerName) {
 
-        document.getElementById('mibacount').innerText=results.miba.count;
-        document.getElementById('mibaamount').innerText=results.miba.amount;
+        document.getElementById('mibacount').innerText = results.miba.count;
+        document.getElementById('mibaamount').innerText = results.miba.amount;
 
-        document.getElementById('yarockcount').innerText=results.yarock.count;
-        document.getElementById('yarockamount').innerText=results.yarock.amount;
+        document.getElementById('yarockcount').innerText = results.yarock.count;
+        document.getElementById('yarockamount').innerText = results.yarock.amount;
 
-        document.getElementById('beentherecount').innerText=results.beenthere.count;
-        document.getElementById('beenthereamount').innerText=results.beenthere.amount;
+        document.getElementById('beentherecount').innerText = results.beenthere.count;
+        document.getElementById('beenthereamount').innerText = results.beenthere.amount;
 
         switch (winnerName) {
             case 'miba':
-                document.getElementById('mibawin').style.display='';        
+                document.getElementById('mibawin').style.display = '';
                 break;
             case 'yarock':
-                document.getElementById('yarockwin').style.display='';        
+                document.getElementById('yarockwin').style.display = '';
                 break;
             case 'beenthere':
-                document.getElementById('beentherewin').style.display='';        
+                document.getElementById('beentherewin').style.display = '';
                 break;
             default:
                 break;
@@ -188,13 +306,13 @@
             db = firebase.firestore(app);
 
             // const loadEl = document.querySelector('#main');
-           
+
 
 
             if (phone) {
-              
-                let winnerCount =0;
-                let winnerName ='';
+
+                let winnerCount = 0;
+                let winnerName = '';
 
                 await db.collection("results").get().then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
@@ -211,7 +329,7 @@
                 console.log(results);
                 console.log(winnerName);
                 resultsView(results, winnerName.toLowerCase());
-                
+
             }
 
             switch (type) {
