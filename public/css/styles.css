@@ -85,10 +85,15 @@ header {
   font-size: 3rem;
 }
 
+h1 , h4, h5{
+  color: var(--xlab2);
+  font-family: cursive;
+}
+
 /* Star */
 .logo img {
   margin-right: 1rem;
-  width: 12rem;
+  width: 14rem;
 }
 
 .logo-res img {
@@ -159,7 +164,7 @@ main {
 /* Card */
 .card {
   width: 25rem;
-  border: 2px solid var(--black);
+  border: 2px solid var(--xlab2);
   overflow: hidden;
   box-shadow: 15px 15px 6px var(--shadow);
   transition: all 0.5s ease;
