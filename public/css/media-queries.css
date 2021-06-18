@@ -1,7 +1,11 @@
 /* These styles will be applied on devices that have a width of at least 768px */
 @media screen and (min-width: 768px) {
   .logo {
-    justify-content: flex-start;
+    justify-content: center;
+  }
+
+  .logo-res {
+    justify-content: center;
   }
 
   .cards {
@@ -13,8 +17,21 @@
     margin: 0 auto;
   }
 
+  .cards-res {
+    flex-direction: row;
+    justify-content: space-around;
+    height: 60%;
+    padding: 0;
+    width: 85%;
+    margin: 0 auto;
+  }
+
   .card {
     width: 30rem;
+  }
+
+  .card-res {
+    width: 60rem;
   }
 
   .card:first-of-type {
@@ -52,6 +69,9 @@
 /* These styles will be applied on devices that have a width of at least 1024px */
 @media screen and (min-width: 1024px) {
   .cards {
+    width: 70%;
+  }
+  .cards-res {
     width: 70%;
   }
 

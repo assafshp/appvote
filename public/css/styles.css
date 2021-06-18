@@ -91,6 +91,11 @@ header {
   width: 12rem;
 }
 
+.logo-res img {
+  margin-right: 1rem;
+  width: 24rem;
+}
+
 /******** 
  * MAIN *
  ********/
@@ -100,6 +105,13 @@ main {
 }
 
 .cards {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem 0;
+}
+
+.cards-res {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -117,6 +129,7 @@ main {
   padding: 4rem;
 }
 
+
 .summary {
   display: flex;
   align-items: center;
@@ -128,6 +141,17 @@ main {
   width: 5rem;
 }
 
+
+
+.app-logo-res {
+  width: 6rem;
+}
+
+.dollar {
+  width: 4rem;
+}
+
+
 .xlabs-logo {
   width: 20rem;
 }
@@ -135,6 +159,17 @@ main {
 /* Card */
 .card {
   width: 25rem;
+  border: 2px solid var(--black);
+  overflow: hidden;
+  box-shadow: 15px 15px 6px var(--shadow);
+  transition: all 0.5s ease;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+}
+
+.card-res {
+  width: 30rem;
   border: 2px solid var(--black);
   overflow: hidden;
   box-shadow: 15px 15px 6px var(--shadow);
@@ -167,6 +202,15 @@ main {
   background: var(--white);
   color: var(--black);
   padding: 1rem 0;
+}
+
+/* Card information */
+.card-info-res {
+  display: flex;
+  justify-content: space-evenly;
+  background: var(--white);
+  color: var(--black);
+  padding: 3rem 0;
 }
 
 .candidate-votes {
