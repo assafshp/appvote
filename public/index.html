@@ -39,8 +39,10 @@
                     </div>
 
                     <button class="card-btn btn-matim" onclick="vote(100,&quot;MiBa&quot;,&quot;0&quot;)">$100</button>
-                    <button class="card-btn btn-no-matim" onclick="vote(1000,&quot;MiBa&quot;,&quot;0&quot;)">$1,000</button>
-                    <button class="card-btn btn-zorm" onclick="vote(10000,&quot;MiBa&quot;,&quot;0&quot;)">$10,000</button>
+                    <button class="card-btn btn-no-matim"
+                        onclick="vote(1000,&quot;MiBa&quot;,&quot;0&quot;)">$1,000</button>
+                    <button class="card-btn btn-zorm"
+                        onclick="vote(10000,&quot;MiBa&quot;,&quot;0&quot;)">$10,000</button>
                 </div>
                 ,
                 <div class="card" id="1">
@@ -51,10 +53,12 @@
                         </div>
                     </div>
 
-                    <button class="card-btn btn-matim" onclick="vote(100,&quot;YaRock&quot;,&quot;1&quot;)">$100</button>
+                    <button class="card-btn btn-matim"
+                        onclick="vote(100,&quot;YaRock&quot;,&quot;1&quot;)">$100</button>
                     <button class="card-btn btn-no-matim"
                         onclick="vote(1000,&quot;YaRock&quot;,&quot;1&quot;)">$1,000</button>
-                    <button class="card-btn btn-zorm" onclick="vote(10000,&quot;YaRock&quot;,&quot;1&quot;)">$10,000</button>
+                    <button class="card-btn btn-zorm"
+                        onclick="vote(10000,&quot;YaRock&quot;,&quot;1&quot;)">$10,000</button>
                 </div>
                 ,
                 <div class="card" id="2">
@@ -65,7 +69,8 @@
                         </div>
                     </div>
 
-                    <button class="card-btn btn-matim" onclick="vote(100,&quot;BeenThere&quot;,&quot;2&quot;)">$100</button>
+                    <button class="card-btn btn-matim"
+                        onclick="vote(100,&quot;BeenThere&quot;,&quot;2&quot;)">$100</button>
                     <button class="card-btn btn-no-matim"
                         onclick="vote(1000,&quot;BeenThere&quot;,&quot;2&quot;)">$1,000</button>
                     <button class="card-btn btn-zorm"
@@ -162,9 +167,91 @@
             loadEl.textContent = 'Error';
         }
     });
+
+    const getCards = () => {
+        return candidates.map(candidate => {
+            return `
+        <div class="card" id="${candidate.id}">
+            <div class="card-info">                
+                <div class="candidate-info">
+                    
+                    <img src="images/${candidate.img}" class="app-logo ${candidate.class}">
+                </div>
+            </div>
+            
+            <button class="card-btn btn-matim" onclick=vote(0,"${candidate.name}","${candidate.id}")>0</button>
+            <button class="card-btn btn-no-matim" onclick=vote(50,"${candidate.name}","${candidate.id}")>50</button>
+            <button class="card-btn btn-zorm" onclick=vote(100,"${candidate.name}","${candidate.id}")>100</button>
+        </div>
+        `
+        })
+    }
+
+    const vote = async (option, date, name) => {
+        console.log(`vote was called, option=${option}, name=${name}, date=${date}`);
+        document.getElementById(name).style.opacity = 0.4;
+        document.getElementById(name).style.pointerEvents = "none";
+
+        voteCount++;
+
+        confetti({
+            particleCount: 300,
+            spread: 90,
+        });
+
+        try {
+            const increment = firebase.firestore.FieldValue.increment(option);
+            const incrementAmount = firebase.firestore.FieldValue.increment(1);
+            const storyRef = db.collection('results').doc(date.toLowerCase());
+            storyRef.update({ count: increment, amount: incrementAmount }, { merge: true });
+        } catch (error) {
+            console.log('error writing to firebase', error);
+        }
+
+        try {
+            var data = JSON.stringify({
+                "amount": 1,
+                "count": option,
+                "name": date.toLowerCase(),
+                "voteid": 1
+            });
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log(this.responseText);
+                }
+            });
+
+            xhr.open("POST", "https://lsybkmzyk:w0cfz8ggvt@bonsai-demo-4717631485.us-east-1.bonsaisearch.net:443/appvote/doc");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("Authorization", "Basic bHN5YmttenlrOncwY2Z6OGdndnQ=");
+
+            xhr.send(data);
+        } catch (error) {
+            console.log('error writing to elastic', error);
+        }
+
+        if (voteCount === 3) {
+            document.getElementById('main').remove();
+            document.getElementById('main1').remove();
+            document.getElementById('cards').remove();
+            document.getElementById('xlogo').remove();
+            document.getElementById('endvote').style.display = "";
+        };
+    }
+
+    const conf = () => {
+        confetti({
+            particleCount: 300,
+            spread: 90,
+        });
+    }
+
 </script>
 
-<script src="js/functions.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 
 
