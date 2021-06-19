@@ -71,7 +71,7 @@
                             <h1>מיזם</h1>
                         </div>
                         <div class="candidate-info">
-                            <img src="images/trophy.png" class="app-logo undefined">
+                            <img src="images/trophy.png" class="app-logo undefined" style="width: 4rem;">
                         </div>
                         <div class="candidate-info">
                             <img src="images/dollar.png" class="app-logo dollar undefined">
@@ -111,7 +111,7 @@
                     </div>
                     <div class="card-info-res">
                         <div class="candidate-info">
-                            <img src="images/beenthere.png" class="app-logo-res undefined">
+                            <img src="images/beenthere.png" class="app-logo-res beenthere-res">
                         </div>
                         <div class="candidate-info">
                             <img id="beentherewin" src="images/winner.png" style="display:none;width: 4rem;">
@@ -212,7 +212,7 @@
             numbers.style.transform = 'translate3d(' + nOffsetX + 'px, ' + nOffsetY + 'px, 0)';
             ++nTick;
             console.log(nTick);
-            if (nTick == 105) {
+            if (nTick == 3) {  //105
                 document.getElementById('message-container').remove();
                 document.getElementById('film-container').remove();
 
@@ -267,7 +267,8 @@
         {
             id: 2,
             name: "BeenThere",
-            img: "beenthere.png"
+            img: "beenthere.png",
+            class: "beenthere"
         }
 
     ]

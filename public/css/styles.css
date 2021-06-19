@@ -200,6 +200,14 @@ main {
   width: 8rem;
 }
 
+.beenthere{
+  width: 12rem;
+}
+
+.beenthere-res{
+  width: 12rem;
+}
+
 /* Card information */
 .card-info {
   display: flex;
