@@ -45,8 +45,8 @@
     </div>
 
     <div id="message-container">
-        
-        
+
+
     </div>
     <!-- APP -->
     <div id="app">
@@ -211,8 +211,8 @@
             lineV.setAttribute('x2', nLineX + nOffsetX);
             numbers.style.transform = 'translate3d(' + nOffsetX + 'px, ' + nOffsetY + 'px, 0)';
             ++nTick;
-            console.log(nTick);
-            if (nTick == 3) {  //105
+            // console.log(nTick);
+            if (nTick == 105) {  //105
                 document.getElementById('message-container').remove();
                 document.getElementById('film-container').remove();
 
@@ -315,18 +315,69 @@
                 let winnerCount = 0;
                 let winnerName = '';
 
-                await db.collection("results").get().then((querySnapshot) => {
-                    querySnapshot.forEach((doc) => {
-                        // doc.data() is never undefined for query doc snapshots
-                        const groupResult = doc.data();
-                        console.log(doc.id, " => ", groupResult);
-                        results[doc.id] = groupResult;
-                        if (groupResult.count > winnerCount) {
-                            winnerCount = groupResult.count;
-                            winnerName = groupResult.name;
-                        }
+                let mibasum = 0;
+                let mibacount = 0;
+                await db.collection("votes").where("vote", "==", "miba").get().then((qq) => {
+                    qq.forEach((doc) => {
+                        mibacount++;
+                        mibasum = mibasum + doc.data().sum;
                     });
                 });
+                if (mibasum > winnerCount) {
+                    winnerCount = mibasum;
+                    winnerName = 'miba';
+                };
+                let yarocksum = 0;
+                let yarockcount = 0;
+                await db.collection("votes").where("vote", "==", "yarock").get().then((qq) => {
+                    qq.forEach((doc) => {
+                        yarockcount++;
+                        yarocksum = yarocksum + doc.data().sum;
+                    });
+                });
+                if (yarocksum > winnerCount) {
+                    winnerCount = yarocksum;
+                    winnerName = 'yarock';
+                };
+                let beentheresum = 0;
+                let beentherecount = 0;
+                await db.collection("votes").where("vote", "==", "beenthere").get().then((qq) => {
+                    qq.forEach((doc) => {
+                        beentherecount++;
+                        beentheresum = beentheresum + doc.data().sum;
+                    });
+                });
+                if (beentheresum > winnerCount) {
+                    winnerCount = beentheresum;
+                    winnerName = 'beenthere';
+                }
+                results['miba'] = {
+                    amount: mibacount,
+                    count: mibasum
+                };
+                results['yarock'] = {
+                    amount: yarockcount,
+                    count: yarocksum
+                };
+                results['beenthere'] = {
+                    amount: beentherecount,
+                    count: beentheresum
+                };
+
+                // console.log(`beentherecount=${beentherecount}`);
+                // console.log(`beentheresum=${beentheresum}`);
+                // await db.collection("results").get().then((querySnapshot) => {
+                //     querySnapshot.forEach((doc) => {
+                //         // doc.data() is never undefined for query doc snapshots
+                //         const groupResult = doc.data();
+                //         console.log(doc.id, " => ", groupResult);
+                //         results[doc.id] = groupResult;
+                //         if (groupResult.count > winnerCount) {
+                //             winnerCount = groupResult.count;
+                //             winnerName = groupResult.name;
+                //         }
+                //     });
+                // });
                 console.log(results);
                 console.log(winnerName);
                 resultsView(results, winnerName.toLowerCase());

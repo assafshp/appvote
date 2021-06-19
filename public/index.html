@@ -226,7 +226,10 @@
             const increment = firebase.firestore.FieldValue.increment(option);
             const incrementAmount = firebase.firestore.FieldValue.increment(1);
             const storyRef = db.collection('results').doc(date.toLowerCase());
-            if (!already) storyRef.update({ count: increment, amount: incrementAmount }, { merge: true });
+
+            if (!already) db.collection('votes').add({ vote: date.toLowerCase() , sum: option, [date.toLowerCase()]:option});
+
+            // if (!already) storyRef.update({ count: increment, amount: incrementAmount }, { merge: true });
         } catch (error) {
             console.log('error writing to firebase', error);
         }
