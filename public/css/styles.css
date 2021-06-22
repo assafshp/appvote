@@ -93,7 +93,7 @@ h1 , h4, h5{
 /* Star */
 .logo img {
   margin-right: 1rem;
-  width: 14rem;
+  width: 11rem;
 }
 
 .logo-res img {
@@ -113,7 +113,7 @@ main {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 
 .cards-res {
@@ -134,6 +134,12 @@ main {
   padding: 4rem;
 }
 
+.end-text1 {
+  padding-top:36px;
+  padding: 4rem;
+}
+
+
 
 .summary {
   display: flex;
@@ -143,9 +149,8 @@ main {
 }
 
 .app-logo {
-  width: 5rem;
+  width: 4.5rem;
 }
-
 
 
 .app-logo-res {
@@ -166,10 +171,10 @@ main {
   width: 25rem;
   border: 2px solid var(--xlab2);
   overflow: hidden;
-  box-shadow: 15px 15px 6px var(--shadow);
+  box-shadow: 10px 10px 6px var(--shadow);
   transition: all 0.5s ease;
   cursor: pointer;
-  margin-bottom: 2rem;
+  margin-bottom: 0.8rem;
   border-radius: 10px;
 }
 
@@ -197,11 +202,11 @@ main {
 }
 
 .yarok{
-  width: 8rem;
+  width: 6rem;
 }
 
 .beenthere{
-  width: 12rem;
+  width: 10rem;
 }
 
 .beenthere-res{
@@ -214,7 +219,7 @@ main {
   justify-content: space-evenly;
   background: var(--white);
   color: var(--black);
-  padding: 1rem 0;
+  padding: 0.5rem 0;
 }
 
 /* Card information */
@@ -283,7 +288,7 @@ main {
   outline: none;
   font-size: 1.5rem;
   font-weight: 700;
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   color: var(--white);
   cursor: pointer;
   border-top: 2px solid var(--black);
@@ -344,12 +349,11 @@ main {
 
 .main-title {
   text-align: center;
-  font-size: 3rem;
-  padding-top: 8px;
+  font-size: 2.5rem;
+  padding-top: 0px;
 }
 
 .main-title2 {
   text-align: center;
-  font-size: 2rem;
-  padding-top: 8px;
+  font-size: 1.5rem;
 }

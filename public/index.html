@@ -78,10 +78,13 @@
                 </div>
             </div>
             <div id="endvote" class="main-title endvote" style="display: none;">
-                <h4 class="end-text">מעולה, תודה רבה ! </h4>
+                <h4 class="end-text">מעולה, תודה רבה על ההשקעה שלך</h4>
+
                 <div>
-                    <img class="xlabs-logo" src="images/xlabs_icon.png">
+                    <img class="xlabs-logo" onclick="logoclick()" src="images/xlabs_icon.png">
                 </div>
+                <h5 class="end-text1">עוד מעט אפשר יהיה לראות כמה גייסו המיזמים על המסך הראשי</h5>
+
             </div>
         </main>
     </div>
@@ -89,9 +92,8 @@
 <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
 <script defer src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
 <script>
-
-    const already = localStorage.getItem('alr');
-
+    const ALRKEY = 'alr1';
+    const already = localStorage.getItem(ALRKEY);
 
     let inviteeName = '';
     let voteCount = 0;
@@ -141,21 +143,22 @@
 
         try {
 
-            if (already) {
-                console.log('alredy');
-                // const myapp = document.getElementById('app');
-                // myapp.style.opacity = 0.4;
-                // myapp.style.pointerEvents = 'none';
-                // myapp.style.pointer-events = 'none';
-                document.getElementById('main').remove();
-                document.getElementById('main1').remove();
-                document.getElementById('cards').remove();
-                document.getElementById('xlogo').remove();
-                document.getElementById('endvote').style.display = "";
+            //ASSAF
+            // if (already) {
+            //     console.log('alredy');
+            //     // const myapp = document.getElementById('app');
+            //     // myapp.style.opacity = 0.4;
+            //     // myapp.style.pointerEvents = 'none';
+            //     // myapp.style.pointer-events = 'none';
+            //     document.getElementById('main').remove();
+            //     document.getElementById('main1').remove();
+            //     document.getElementById('cards').remove();
+            //     document.getElementById('xlogo').remove();
+            //     document.getElementById('endvote').style.display = "";
 
-            } else {
-                console.log('new');
-            }
+            // } else {
+            //     console.log('new');
+            // }
 
 
 
@@ -210,6 +213,14 @@
         })
     }
 
+
+    const logoclick = async() => {
+        confetti({
+            particleCount: 300,
+            spread: 90,
+        });
+    };
+
     const vote = async (option, date, name) => {
         console.log(`vote was called, option=${option}, name=${name}, date=${date}`);
         document.getElementById(name).style.opacity = 0.4;
@@ -227,7 +238,8 @@
             const incrementAmount = firebase.firestore.FieldValue.increment(1);
             const storyRef = db.collection('results').doc(date.toLowerCase());
 
-            if (!already) db.collection('votes').add({ vote: date.toLowerCase() , sum: option, [date.toLowerCase()]:option});
+            // if (!already) db.collection('votes').add({ vote: date.toLowerCase() , sum: option, [date.toLowerCase()]:option});
+            db.collection('votes').add({ vote: date.toLowerCase() , sum: option, [date.toLowerCase()]:option});
 
             // if (!already) storyRef.update({ count: increment, amount: incrementAmount }, { merge: true });
         } catch (error) {
@@ -242,6 +254,8 @@
                 "voteid": 1
             });
 
+            console.log(`before http`);
+
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
 
@@ -255,13 +269,15 @@
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("Authorization", "Basic bHN5YmttenlrOncwY2Z6OGdndnQ=");
 
-            if (!already) xhr.send(data);
+            // if (!already) xhr.send(data);
+            xhr.send(data);
         } catch (error) {
             console.log('error writing to elastic', error);
         }
 
         if (voteCount === 3) {
-            //localStorage.setItem('alr', true);
+            //assaf
+            localStorage.setItem(ALRKEY, true);
 
             document.getElementById('main').remove();
             document.getElementById('main1').remove();
