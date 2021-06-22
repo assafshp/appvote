@@ -5,204 +5,199 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>X-Labs 2021</title>
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"> -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/media-queries.css" />
-
-
-
-
-
-    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="X-Labs 2021">
+    <meta name="keywords"
+        content="x-labs">
+    <meta property="og:title" content="X-Labs 2021">
+    <meta property="og:description" content="X-Labs 2021">
+    <meta property="og:image" content="https://xappvote.web.app/images/xlabs_social.png">
+    <meta property="og:locale" content="en_us">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xappvote.web.app">
+    <meta property="og:site_name" content="X-Labs 2021">
+    <meta property="og:image:width" content="202">
+    <meta property="og:image:height" content="200">
 </head>
 
 <body>
+    <div id=" app">
+    <div class="app-overlay"></div>
+    <header>
+        <div id="xlogo" class="logo">
+            <img src="images/xlabs_icon.png">
+        </div>
+    </header>
+    <main>
+        <h1 id="main" class="main-title">זה הזמן להשפיע</h1>
+        <h5 id="main1" class="main-title2">אנא הצבע/י לכל אחד מהמיזמים</h5>
+        <div id="cards" class="cards" style="opacity: 1;">
+            <div class="card" id="0">
+                <div class="card-info">
+                    <div class="candidate-info">
 
-    <!-- APP -->
-    <div id="app">
-        <div class="app-overlay"></div>
-        <!-- HEADER -->
-        <header>
-            <!-- <a href="#topAnchor"></a>  -->
-
-            <div id="xlogo" class="logo">
-                <img src="images/xlabs_icon.png">
-            </div>
-        </header>
-        <!-- MAIN -->
-        <main>
-
-            <h1 id="main" class="main-title">זה הזמן להשפיע</h1>
-            <h5 id="main1" class="main-title2">אנא הצבע/י לכל אחד מהמיזמים</h5>
-            <div id="cards" class="cards" style="opacity: 1;">
-                <div class="card" id="0">
-                    <div class="card-info">
-                        <div class="candidate-info">
-
-                            <img src="images/miba.png" class="app-logo undefined">
-                        </div>
+                        <img src="images/miba.png" class="app-logo undefined">
                     </div>
-
-                    <button class="card-btn btn-matim" onclick="vote(100,&quot;MiBa&quot;,&quot;0&quot;)">$100</button>
-                    <button class="card-btn btn-no-matim"
-                        onclick="vote(1000,&quot;MiBa&quot;,&quot;0&quot;)">$1,000</button>
-                    <button class="card-btn btn-zorm"
-                        onclick="vote(10000,&quot;MiBa&quot;,&quot;0&quot;)">$10,000</button>
                 </div>
-                ,
-                <div class="card" id="1">
-                    <div class="card-info">
-                        <div class="candidate-info">
 
-                            <img src="images/yarock.png" class="app-logo yarok">
-                        </div>
-                    </div>
-
-                    <button class="card-btn btn-matim"
-                        onclick="vote(100,&quot;YaRock&quot;,&quot;1&quot;)">$100</button>
-                    <button class="card-btn btn-no-matim"
-                        onclick="vote(1000,&quot;YaRock&quot;,&quot;1&quot;)">$1,000</button>
-                    <button class="card-btn btn-zorm"
-                        onclick="vote(10000,&quot;YaRock&quot;,&quot;1&quot;)">$10,000</button>
-                </div>
-                ,
-                <div class="card" id="2">
-                    <div class="card-info">
-                        <div class="candidate-info">
-
-                            <img src="images/beenthere.png" class="app-logo beenthere">
-                        </div>
-                    </div>
-
-                    <button class="card-btn btn-matim"
-                        onclick="vote(100,&quot;BeenThere&quot;,&quot;2&quot;)">$100</button>
-                    <button class="card-btn btn-no-matim"
-                        onclick="vote(1000,&quot;BeenThere&quot;,&quot;2&quot;)">$1,000</button>
-                    <button class="card-btn btn-zorm"
-                        onclick="vote(10000,&quot;BeenThere&quot;,&quot;2&quot;)">$10,000</button>
-                </div>
+                <button class="card-btn btn-matim" onclick="vote(100,&quot;MiBa&quot;,&quot;0&quot;)">$100</button>
+                <button class="card-btn btn-no-matim"
+                    onclick="vote(1000,&quot;MiBa&quot;,&quot;0&quot;)">$1,000</button>
+                <button class="card-btn btn-zorm" onclick="vote(10000,&quot;MiBa&quot;,&quot;0&quot;)">$10,000</button>
             </div>
-            <div id="endvote" class="main-title endvote" style="display: none;">
-                <h4 class="end-text">מעולה, תודה רבה על ההשקעה שלך</h4>
+            ,
+            <div class="card" id="1">
+                <div class="card-info">
+                    <div class="candidate-info">
 
-                <div>
-                    <img class="xlabs-logo" onclick="logoclick()" src="images/xlabs_icon.png">
+                        <img src="images/yarock.png" class="app-logo yarok">
+                    </div>
                 </div>
-                <h5 class="end-text1">עוד מעט אפשר יהיה לראות כמה גייסו המיזמים על המסך הראשי</h5>
 
+                <button class="card-btn btn-matim" onclick="vote(100,&quot;YaRock&quot;,&quot;1&quot;)">$100</button>
+                <button class="card-btn btn-no-matim"
+                    onclick="vote(1000,&quot;YaRock&quot;,&quot;1&quot;)">$1,000</button>
+                <button class="card-btn btn-zorm"
+                    onclick="vote(10000,&quot;YaRock&quot;,&quot;1&quot;)">$10,000</button>
             </div>
-        </main>
+            ,
+            <div class="card" id="2">
+                <div class="card-info">
+                    <div class="candidate-info">
+
+                        <img src="images/beenthere.png" class="app-logo beenthere">
+                    </div>
+                </div>
+
+                <button class="card-btn btn-matim" onclick="vote(100,&quot;BeenThere&quot;,&quot;2&quot;)">$100</button>
+                <button class="card-btn btn-no-matim"
+                    onclick="vote(1000,&quot;BeenThere&quot;,&quot;2&quot;)">$1,000</button>
+                <button class="card-btn btn-zorm"
+                    onclick="vote(10000,&quot;BeenThere&quot;,&quot;2&quot;)">$10,000</button>
+            </div>
+        </div>
+        <div id="endvote" class="main-title endvote" style="display: none;">
+            <h4 class="end-text">מעולה, תודה רבה על ההשקעה שלך</h4>
+
+            <div>
+                <img class="xlabs-logo" onclick="logoclick()" src="images/xlabs_icon.png">
+            </div>
+            <h5 class="end-text1">עוד מעט אפשר יהיה לראות כמה גייסו המיזמים על המסך הראשי</h5>
+
+        </div>
+    </main>
     </div>
-</body>
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.6.1/firebase-firestore.min.js"></script>
-<script>
-    const ALRKEY = 'alr1';
-    const already = localStorage.getItem(ALRKEY);
+    </body>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.6.1/firebase-firestore.min.js"></script>
+    <script>
+        const ALRKEY = 'alr1';
+        const already = localStorage.getItem(ALRKEY);
 
-    let inviteeName = '';
-    let voteCount = 0;
+        let inviteeName = '';
+        let voteCount = 0;
 
-    var firebaseConfig = {
-        apiKey: "AIzaSyBGvPBIU_J7NHpUqAYxmJm7XHs8JQDJzbQ",
-        authDomain: "xappvote.firebaseapp.com",
-        projectId: "xappvote",
-        storageBucket: "xappvote.appspot.com",
-        messagingSenderId: "582541238903",
-        appId: "1:582541238903:web:c6ccd79e010899408ddc72"
-    };
+        var firebaseConfig = {
+            apiKey: "AIzaSyBGvPBIU_J7NHpUqAYxmJm7XHs8JQDJzbQ",
+            authDomain: "xappvote.firebaseapp.com",
+            projectId: "xappvote",
+            storageBucket: "xappvote.appspot.com",
+            messagingSenderId: "582541238903",
+            appId: "1:582541238903:web:c6ccd79e010899408ddc72"
+        };
 
-    var app;
-    var db;
+        var app;
+        var db;
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const phone = urlParams.get('p');
-    console.log(`phone=${phone}`);
-    const type = urlParams.get('t');
-    let votes = {};
-    let event = {};
-
-
-    let candidates = [
-        {
-            id: 0,
-            name: "MiBa",
-            img: "miba.png"
-        },
-        {
-            id: 1,
-            name: "YaRock",
-            img: "yarock.png",
-            class: "yarok"
-        },
-        {
-            id: 2,
-            name: "BeenThere",
-            img: "beenthere.png",
-            class: "beenthere"
-        }
-    ]
+        const urlParams = new URLSearchParams(window.location.search);
+        const phone = urlParams.get('p');
+        console.log(`phone=${phone}`);
+        const type = urlParams.get('t');
+        let votes = {};
+        let event = {};
 
 
-    document.addEventListener('DOMContentLoaded', async () => {
-
-        try {
-
-            //ASSAF
-            // if (already) {
-            //     console.log('alredy');
-            //     // const myapp = document.getElementById('app');
-            //     // myapp.style.opacity = 0.4;
-            //     // myapp.style.pointerEvents = 'none';
-            //     // myapp.style.pointer-events = 'none';
-            //     document.getElementById('main').remove();
-            //     document.getElementById('main1').remove();
-            //     document.getElementById('cards').remove();
-            //     document.getElementById('xlogo').remove();
-            //     document.getElementById('endvote').style.display = "";
-
-            // } else {
-            //     console.log('new');
-            // }
-
-
-
-            app = firebase.initializeApp(firebaseConfig);
-            db = firebase.firestore(app);
-
-            const enabled = (await db.collection('events').doc('xlabs').get()).data().enabled;
-            if (!enabled){
-                document.getElementById('main').innerHTML='ההצבעה עדין לא החלה';
-                document.getElementById('main1').innerHTML = ' נסה שנית עוד מעט';
-                document.getElementById('cards').remove();
+        let candidates = [
+            {
+                id: 0,
+                name: "MiBa",
+                img: "miba.png"
+            },
+            {
+                id: 1,
+                name: "YaRock",
+                img: "yarock.png",
+                class: "yarok"
+            },
+            {
+                id: 2,
+                name: "BeenThere",
+                img: "beenthere.png",
+                class: "beenthere"
             }
+        ]
 
-            if (phone) {
-                event = (await db.collection('events').doc(phone).get()).data();
-                candidates[0].name = event.date;
-                candidates[1].name = event.date1;
-                candidates[2].name = event.date2;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+
+            try {
+
+                //ASSAF
+                // if (already) {
+                //     console.log('alredy');
+                //     // const myapp = document.getElementById('app');
+                //     // myapp.style.opacity = 0.4;
+                //     // myapp.style.pointerEvents = 'none';
+                //     // myapp.style.pointer-events = 'none';
+                //     document.getElementById('main').remove();
+                //     document.getElementById('main1').remove();
+                //     document.getElementById('cards').remove();
+                //     document.getElementById('xlogo').remove();
+                //     document.getElementById('endvote').style.display = "";
+
+                // } else {
+                //     console.log('new');
+                // }
+
+
+
+                app = firebase.initializeApp(firebaseConfig);
+                db = firebase.firestore(app);
+
+                const enabled = (await db.collection('events').doc('xlabs').get()).data().enabled;
+                if (!enabled) {
+                    document.getElementById('main').innerHTML = 'ההצבעה עדין לא החלה';
+                    document.getElementById('main1').innerHTML = ' נסה שנית עוד מעט';
+                    document.getElementById('cards').remove();
+                }
+
+                if (phone) {
+                    event = (await db.collection('events').doc(phone).get()).data();
+                    candidates[0].name = event.date;
+                    candidates[1].name = event.date1;
+                    candidates[2].name = event.date2;
+                }
+
+                switch (type) {
+                    default:
+                        // loadEl.textContent = 'זה הזמן להשפיע';
+                        // loadEl1.textContent = 'אנא הצבע/י לכל אחד מהמיזמים';
+                        // const cards = document.querySelector('.cards');
+                        // document.getElementById('cards').style.opacity = 0;
+                        // cards.innerHTML = getCards();
+                        // document.getElementById('cards').style.opacity = 1;
+                        break;
+                }
+            } catch (e) {
+                console.error(e);
             }
+        });
 
-            switch (type) {
-                default:
-                    // loadEl.textContent = 'זה הזמן להשפיע';
-                    // loadEl1.textContent = 'אנא הצבע/י לכל אחד מהמיזמים';
-                    // const cards = document.querySelector('.cards');
-                    // document.getElementById('cards').style.opacity = 0;
-                    // cards.innerHTML = getCards();
-                    // document.getElementById('cards').style.opacity = 1;
-                    break;
-            }
-        } catch (e) {
-            console.error(e);
-        }
-    });
-
-    const getCards = () => {
-        return candidates.map(candidate => {
-            return `
+        const getCards = () => {
+            return candidates.map(candidate => {
+                return `
         <div class="card" id="${candidate.id}">
             <div class="card-info">                
                 <div class="candidate-info">
@@ -216,93 +211,92 @@
             <button class="card-btn btn-zorm" onclick=vote(100,"${candidate.name}","${candidate.id}")>100</button>
         </div>
         `
-        })
-    }
-
-
-    const logoclick = async() => {
-        confetti({
-            particleCount: 300,
-            spread: 90,
-        });
-    };
-
-    const vote = async (option, date, name) => {
-        console.log(`vote was called, option=${option}, name=${name}, date=${date}`);
-        document.getElementById(name).style.opacity = 0.4;
-        document.getElementById(name).style.pointerEvents = "none";
-
-        voteCount++;
-
-        confetti({
-            particleCount: 300,
-            spread: 90,
-        });
-
-        try {
-            const increment = firebase.firestore.FieldValue.increment(option);
-            const incrementAmount = firebase.firestore.FieldValue.increment(1);
-            const storyRef = db.collection('results').doc(date.toLowerCase());
-
-            // if (!already) db.collection('votes').add({ vote: date.toLowerCase() , sum: option, [date.toLowerCase()]:option});
-            db.collection('votes').add({ vote: date.toLowerCase() , sum: option, [date.toLowerCase()]:option});
-
-            // if (!already) storyRef.update({ count: increment, amount: incrementAmount }, { merge: true });
-        } catch (error) {
-            console.log('error writing to firebase', error);
+            })
         }
 
-        try {
-            var data = JSON.stringify({
-                "amount": 1,
-                "count": option,
-                "name": date.toLowerCase(),
-                "voteid": 1
+
+        const logoclick = async () => {
+            confetti({
+                particleCount: 300,
+                spread: 90,
             });
-
-            console.log(`before http`);
-
-            var xhr = new XMLHttpRequest();
-            xhr.withCredentials = true;
-
-            xhr.addEventListener("readystatechange", function () {
-                if (this.readyState === 4) {
-                    console.log(this.responseText);
-                }
-            });
-
-            xhr.open("POST", "https://lsybkmzyk:w0cfz8ggvt@bonsai-demo-4717631485.us-east-1.bonsaisearch.net:443/appvote/doc");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader("Authorization", "Basic bHN5YmttenlrOncwY2Z6OGdndnQ=");
-
-            // if (!already) xhr.send(data);
-            xhr.send(data);
-        } catch (error) {
-            console.log('error writing to elastic', error);
-        }
-
-        if (voteCount === 3) {
-            //assaf
-            localStorage.setItem(ALRKEY, true);
-
-            document.getElementById('main').remove();
-            document.getElementById('main1').remove();
-            document.getElementById('cards').remove();
-            document.getElementById('xlogo').remove();
-            document.getElementById('endvote').style.display = "";
         };
-    }
 
-    const conf = () => {
-        confetti({
-            particleCount: 300,
-            spread: 90,
-        });
-    }
+        const vote = async (option, date, name) => {
+            console.log(`vote was called, option=${option}, name=${name}, date=${date}`);
+            document.getElementById(name).style.opacity = 0.4;
+            document.getElementById(name).style.pointerEvents = "none";
 
-</script>
+            voteCount++;
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js" defer></script>
+            confetti({
+                particleCount: 300,
+                spread: 90,
+            });
 
+            try {
+                const increment = firebase.firestore.FieldValue.increment(option);
+                const incrementAmount = firebase.firestore.FieldValue.increment(1);
+                const storyRef = db.collection('results').doc(date.toLowerCase());
+
+                // if (!already) db.collection('votes').add({ vote: date.toLowerCase() , sum: option, [date.toLowerCase()]:option});
+                db.collection('votes').add({ vote: date.toLowerCase(), sum: option, [date.toLowerCase()]: option });
+
+                // if (!already) storyRef.update({ count: increment, amount: incrementAmount }, { merge: true });
+            } catch (error) {
+                console.log('error writing to firebase', error);
+            }
+
+            try {
+                var data = JSON.stringify({
+                    "amount": 1,
+                    "count": option,
+                    "name": date.toLowerCase(),
+                    "voteid": 1
+                });
+
+                console.log(`before http`);
+
+                var xhr = new XMLHttpRequest();
+                xhr.withCredentials = true;
+
+                xhr.addEventListener("readystatechange", function () {
+                    if (this.readyState === 4) {
+                        console.log(this.responseText);
+                    }
+                });
+
+                xhr.open("POST", "https://lsybkmzyk:w0cfz8ggvt@bonsai-demo-4717631485.us-east-1.bonsaisearch.net:443/appvote/doc");
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.setRequestHeader("Authorization", "Basic bHN5YmttenlrOncwY2Z6OGdndnQ=");
+
+                // if (!already) xhr.send(data);
+                xhr.send(data);
+            } catch (error) {
+                console.log('error writing to elastic', error);
+            }
+
+            if (voteCount === 3) {
+                //assaf
+                localStorage.setItem(ALRKEY, true);
+
+                document.getElementById('main').remove();
+                document.getElementById('main1').remove();
+                document.getElementById('cards').remove();
+                document.getElementById('xlogo').remove();
+                document.getElementById('endvote').style.display = "";
+            };
+        }
+
+        const conf = () => {
+            confetti({
+                particleCount: 300,
+                spread: 90,
+            });
+        }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js" defer></script>
 
 </html>
