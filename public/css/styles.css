@@ -70,7 +70,7 @@ body {
 
 header {
   background: var(--white);
-  padding: 1rem 2rem;
+  padding: 0.8rem 2rem;
 }
 
 .logo {
@@ -93,7 +93,7 @@ h1 , h4, h5{
 /* Star */
 .logo img {
   margin-right: 1rem;
-  width: 11rem;
+  width: 5rem;
 }
 
 .logo-res img {
