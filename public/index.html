@@ -93,8 +93,10 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.6.1/firebase-firestore.min.js"></script>
     <script>
-        const ALRKEY = 'alr5';
-        const already = localStorage.getItem(ALRKEY);
+        const ALRKEY = 'alr6';
+        // const already = localStorage.getItem(ALRKEY);
+        // Assaf - allow multiple votes
+        const already = false;
 
         let inviteeName = '';
         let voteCount = 0;
@@ -167,6 +169,8 @@
                 db = firebase.firestore(app);
 
                 const enabled = (await db.collection('events').doc('xlabs').get()).data().enabled;
+                // Assaf - enable manually
+                // const enabled = true;
                 if (!enabled) {
                     if (document.getElementById('main')) document.getElementById('main').innerHTML = 'ההצבעה עדיין לא החלה';
                     if (document.getElementById('main1')) document.getElementById('main1').innerHTML = ' נסה שנית עוד מעט';

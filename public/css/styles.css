@@ -231,6 +231,10 @@ main {
   padding: 3rem 0;
 }
 
+.beentherefix {
+  padding-left: 3rem;
+}
+
 .candidate-votes {
   display: flex;
   flex-direction: column;
