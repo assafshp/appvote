@@ -93,7 +93,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.6.1/firebase-firestore.min.js"></script>
     <script>
-        const ALRKEY = 'alr1';
+        const ALRKEY = 'alr2;
         const already = localStorage.getItem(ALRKEY);
 
         let inviteeName = '';
@@ -144,22 +144,22 @@
 
             try {
 
-                //ASSAF
-                // if (already) {
-                //     console.log('alredy');
-                //     // const myapp = document.getElementById('app');
-                //     // myapp.style.opacity = 0.4;
-                //     // myapp.style.pointerEvents = 'none';
-                //     // myapp.style.pointer-events = 'none';
-                //     document.getElementById('main').remove();
-                //     document.getElementById('main1').remove();
-                //     document.getElementById('cards').remove();
-                //     document.getElementById('xlogo').remove();
-                //     document.getElementById('endvote').style.display = "";
+                // Assaf - already
+                if (already) {
+                    console.log('alredy');
+                    // const myapp = document.getElementById('app');
+                    // myapp.style.opacity = 0.4;
+                    // myapp.style.pointerEvents = 'none';
+                    // myapp.style.pointer-events = 'none';
+                    document.getElementById('main').remove();
+                    document.getElementById('main1').remove();
+                    document.getElementById('cards').remove();
+                    document.getElementById('xlogo').remove();
+                    document.getElementById('endvote').style.display = "";
 
-                // } else {
-                //     console.log('new');
-                // }
+                } else {
+                    console.log('new');
+                }
 
 
 
@@ -240,7 +240,10 @@
                 const storyRef = db.collection('results').doc(date.toLowerCase());
 
                 // if (!already) db.collection('votes').add({ vote: date.toLowerCase() , sum: option, [date.toLowerCase()]:option});
-                db.collection('votes').add({ vote: date.toLowerCase(), sum: option, [date.toLowerCase()]: option });
+                // db.collection('votes').add({ vote: date.toLowerCase(), sum: option, [date.toLowerCase()]: option });
+
+                // Assaf - already
+                if (!already) db.collection('votes').add({ vote: date.toLowerCase(), sum: option, [date.toLowerCase()]: option });
 
                 // if (!already) storyRef.update({ count: increment, amount: incrementAmount }, { merge: true });
             } catch (error) {
@@ -271,13 +274,15 @@
                 xhr.setRequestHeader("Authorization", "Basic bHN5YmttenlrOncwY2Z6OGdndnQ=");
 
                 // if (!already) xhr.send(data);
-                xhr.send(data);
+
+                // Assaf - already
+                if (!already) xhr.send(data);
             } catch (error) {
                 console.log('error writing to elastic', error);
             }
 
             if (voteCount === 3) {
-                //assaf
+                // Assaf - already
                 localStorage.setItem(ALRKEY, true);
 
                 document.getElementById('main').remove();
