@@ -168,7 +168,7 @@
 
                 const enabled = (await db.collection('events').doc('xlabs').get()).data().enabled;
                 if (!enabled) {
-                    document.getElementById('main').innerHTML = 'ההצבעה עדין לא החלה';
+                    document.getElementById('main').innerHTML = 'ההצבעה עדיין לא החלה';
                     document.getElementById('main1').innerHTML = ' נסה שנית עוד מעט';
                     document.getElementById('cards').remove();
                 }
