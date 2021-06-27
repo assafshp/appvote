@@ -93,7 +93,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.6.1/firebase-firestore.min.js"></script>
     <script>
-        const ALRKEY = 'alr2;
+        const ALRKEY = 'alr5';
         const already = localStorage.getItem(ALRKEY);
 
         let inviteeName = '';
@@ -168,9 +168,9 @@
 
                 const enabled = (await db.collection('events').doc('xlabs').get()).data().enabled;
                 if (!enabled) {
-                    document.getElementById('main').innerHTML = 'ההצבעה עדיין לא החלה';
-                    document.getElementById('main1').innerHTML = ' נסה שנית עוד מעט';
-                    document.getElementById('cards').remove();
+                    if (document.getElementById('main')) document.getElementById('main').innerHTML = 'ההצבעה עדיין לא החלה';
+                    if (document.getElementById('main1')) document.getElementById('main1').innerHTML = ' נסה שנית עוד מעט';
+                    if (document.getElementById('cards')) document.getElementById('cards').remove();
                 }
 
                 if (phone) {
