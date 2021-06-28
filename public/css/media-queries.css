@@ -20,10 +20,11 @@
   .cards-res {
     flex-direction: row;
     justify-content: space-around;
-    height: 60%;
+    /* height: 60%; */
     padding: 0;
     width: 85%;
     margin: 0 auto;
+    margin-top: 16px;
   }
 
   .card {
@@ -73,6 +74,8 @@
   }
   .cards-res {
     width: 70%;
+    padding: 12px;
+    margin-top: 16px;
   }
 
   .card:hover {
