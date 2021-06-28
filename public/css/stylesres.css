@@ -87,7 +87,7 @@ header {
 
 h1 , h4, h5{
   color: var(--xlab2);
-  font-family: cursive;
+  /* font-family: cursive; */
 }
 
 /* Star */
@@ -114,6 +114,7 @@ main {
   align-items: center;
   flex-direction: column;
   padding: 1rem 0;
+  
 }
 
 .cards-res {
@@ -121,6 +122,12 @@ main {
   align-items: center;
   flex-direction: column;
   padding: 2rem 0;
+  height: auto;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 60px;
+  max-width: 600px !important;
+  
 }
 
 .invitation {
@@ -360,4 +367,47 @@ main {
 .main-title2 {
   text-align: center;
   font-size: 1.5rem;
+}
+
+
+.some-page-wrapper {
+  margin: 15px;
+  padding: 16px;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  text-align: center;
+}
+
+.orange-column {
+  /* background-color: orange; */
+  height: 90px;
+}
+
+.blue-column {
+  /* background-color: blue; */
+  height: 90px;
+}
+
+.green-column {
+  /* background-color: green; */
+  height: 90px;
+  width: 140px;
+}
+
+
+.last-row {
+  height: 40px;
 }
